@@ -133,6 +133,113 @@ export default function P3ColorConverter() {
         <div className="flex w-full max-w-md flex-col gap-3">
           <div className="mt-2 flex flex-col gap-2">
             <h2 className="font-semibold text-xl">Preview</h2>
+
+            {/* Split View Comparison */}
+            <div className="mb-4">
+              <h3 className="mb-1 font-medium text-sm">Split Comparison</h3>
+              <div className="flex h-24 w-full overflow-hidden rounded border">
+                <div
+                  className="flex h-full w-1/2 items-center justify-center"
+                  style={{ backgroundColor: input }}
+                >
+                  <span className="rounded bg-white/70 px-2 py-1 text-xs">sRGB</span>
+                </div>
+                <div
+                  className="flex h-full w-1/2 items-center justify-center"
+                  style={{
+                    backgroundColor: output.includes('color(display-p3') ? output : undefined,
+                  }}
+                >
+                  <span className="rounded bg-white/70 px-2 py-1 text-xs">display-p3</span>
+                </div>
+              </div>
+            </div>
+
+            {/* Gamut Difference */}
+            <div className="mb-4">
+              <h3 className="mb-1 font-medium text-sm">Gamut Comparison</h3>
+              <div className="rounded border bg-white p-3">
+                <div className="mb-2 flex justify-between">
+                  <span className="text-xs">sRGB</span>
+                  <span className="text-xs">display-p3</span>
+                </div>
+                {output.includes('color(display-p3') && (
+                  <div className="mb-2 rounded bg-gray-100 py-1 text-center text-xs">
+                    display-p3 can represent approximately 50% more colors than sRGB
+                  </div>
+                )}
+                <div className="flex gap-4">
+                  <div className="flex-1">
+                    <div className="mb-1 h-16 rounded border" style={{ backgroundColor: input }} />
+                    <code className="block truncate text-xs">{toRgb(input)}</code>
+                  </div>
+                  <div className="flex-1">
+                    <div
+                      className="mb-1 h-16 rounded border"
+                      style={{
+                        backgroundColor: output.includes('color(display-p3') ? output : undefined,
+                      }}
+                    />
+                    <code className="block truncate text-xs">{output}</code>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Background Context */}
+            <div className="mb-4">
+              <h3 className="mb-1 font-medium text-sm">Background Context</h3>
+              <div className="grid grid-cols-2 gap-2">
+                <div className="rounded border bg-white p-2">
+                  <div className="mb-1 text-center text-xs">Light Background</div>
+                  <div
+                    className="h-12 rounded"
+                    style={{
+                      backgroundColor: output.includes('color(display-p3') ? output : input,
+                    }}
+                  />
+                </div>
+                <div className="rounded border bg-gray-800 p-2">
+                  <div className="mb-1 text-center text-white text-xs">Dark Background</div>
+                  <div
+                    className="h-12 rounded"
+                    style={{
+                      backgroundColor: output.includes('color(display-p3') ? output : input,
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+
+            {/* Device Support */}
+            <div className="mb-4">
+              <h3 className="mb-1 font-medium text-sm">Device Support Preview</h3>
+              <div className="rounded border bg-white p-3">
+                <div className="mb-2 flex gap-2">
+                  <div className="flex-1 rounded border bg-gray-50 p-2">
+                    <div className="mb-1 text-center text-xs">Supporting Device</div>
+                    <div
+                      className="h-12 rounded shadow-sm"
+                      style={{
+                        backgroundColor: output.includes('color(display-p3') ? output : input,
+                      }}
+                    />
+                  </div>
+                  <div className="flex-1 rounded border bg-gray-50 p-2">
+                    <div className="mb-1 text-center text-xs">Non-supporting Device</div>
+                    <div
+                      className="h-12 rounded opacity-90 shadow-sm"
+                      style={{ backgroundColor: input }}
+                    />
+                  </div>
+                </div>
+                <div className="rounded bg-gray-100 p-1 text-center text-xs">
+                  Non-supporting devices will fall back to closest sRGB approximation
+                </div>
+              </div>
+            </div>
+
+            {/* Original side-by-side view */}
             <div className="flex gap-2">
               <div
                 className="flex-1 rounded border py-10 text-center"
