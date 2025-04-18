@@ -45,8 +45,8 @@ export default function GradientBuilder() {
   };
 
   return (
-    <div className="mt-16">
-      <h2 className="mb-4 font-semibold text-2xl">🧬 P3 Gradient Builder</h2>
+    <div>
+      <h1 className="mb-3 font-bold text-3xl">🧬 P3 Gradient Builder</h1>
 
       <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
         <div className="flex max-w-md flex-col gap-3">
