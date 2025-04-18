@@ -14,11 +14,21 @@ export default function ExportCssButton({
   const [status, setStatus] = useState('');
 
   const handleExport = ({ selectors, filename = 'styles.css' }: ExportCssButtonProps) => {
-    const lines = selectors.map(
-      ({ name, property = 'color', value }) => `.${name} {\n  ${property}: ${value};\n}`
-    );
-    const cssContent = lines.join('\n\n');
+    // Generate CSS content with selectors and properties
+    const lines = selectors.map(({ name, property = 'color', value }) => {
+      // Add a comment with original color/value for reference
+      return `/* ${property}: ${value} */\n.${name} {\n  ${property}: ${value};\n}`;
+    });
 
+    // Add a header comment to the CSS file
+    const header = `/* 
+ * P3 Color Converter - Generated CSS
+ * Created: ${new Date().toLocaleString()}
+ */\n\n`;
+
+    const cssContent = header + lines.join('\n\n');
+
+    // Create a downloadable blob and trigger download
     const blob = new Blob([cssContent], { type: 'text/css' });
     const url = URL.createObjectURL(blob);
 

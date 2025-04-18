@@ -11,6 +11,7 @@ export default function Home() {
   const [input, setInput] = useState('#FF5733');
   const [filename, setFilename] = useState('styles.css');
   const [output, setOutput] = useState('');
+  const [selectorName, setSelectorName] = useState('color');
   const [outputFormat, setOutputFormat] = useState<'p3' | 'hex' | 'rgb' | 'hsl'>('p3');
 
   // Update output whenever input or outputFormat changes
@@ -40,6 +41,15 @@ export default function Home() {
     if (result) setOutput(result);
     else setOutput('Invalid color format');
   }, [input, outputFormat]);
+
+  // Generate CSS class name from input color
+  useEffect(() => {
+    if (isValidColor(input)) {
+      // Convert input to a simple name without # and lowercase
+      const colorName = input.replace('#', '').toLowerCase();
+      setSelectorName(`color-${colorName}`);
+    }
+  }, [input]);
 
   return (
     <main className="min-h-screen bg-neutral-100 p-10 text-gray-900">
@@ -123,13 +133,32 @@ export default function Home() {
 
           <div className="mt-4">
             <h2 className="mb-2 font-semibold text-xl">Export</h2>
-            <input
-              value={filename}
-              className="mb-2 w-full rounded border border-gray-300 p-2"
-              onChange={(e) => setFilename(e.target.value)}
-              placeholder="filename.css"
+            <div className="mb-2 flex flex-col gap-2">
+              <label htmlFor="selector-name" className="text-sm">
+                CSS Class Name:
+              </label>
+              <input
+                id="selector-name"
+                value={selectorName}
+                className="w-full rounded border border-gray-300 p-2"
+                onChange={(e) => setSelectorName(e.target.value)}
+                placeholder="Enter CSS class name"
+              />
+              <label htmlFor="filename-input" className="text-sm">
+                File Name:
+              </label>
+              <input
+                id="filename-input"
+                value={filename}
+                className="w-full rounded border border-gray-300 p-2"
+                onChange={(e) => setFilename(e.target.value)}
+                placeholder="filename.css"
+              />
+            </div>
+            <ExportCssButton
+              selectors={[{ name: selectorName, value: output }]}
+              filename={filename}
             />
-            <ExportCssButton selectors={[{ name: 'color', value: output }]} filename={filename} />
           </div>
         </div>
       </div>
