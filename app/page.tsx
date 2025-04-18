@@ -2,9 +2,12 @@
 
 import { useState } from "react";
 import { toDisplayP3 } from "@/components/utils/colorUtils";
+import GradientBuilder from "@/components/GradientBuilder";
+import ExportCssButton from "@/components/ExportCssButton";
 
 export default function Home() {
   const [input, setInput] = useState("#FF5733");
+  const [filename, setFilename] = useState("styles.css");
   const [output, setOutput] = useState("");
 
   const handleConvert = () => {
@@ -17,7 +20,8 @@ export default function Home() {
     <main className="min-h-screen p-10 bg-neutral-100 text-gray-900">
       <h1 className="text-3xl font-bold mb-6">🎨 P3 Color Converter</h1>
 
-      <div className="flex flex-col gap-4 max-w-md">
+      <div className="flex justify-between">
+        <div className="flex flex-col gap-4 max-w-md">
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -39,6 +43,12 @@ export default function Home() {
           </div>
         )}
       </div>
+      <div className="flex flex-col gap-4 max-w-md">
+        <input value={filename} className="p-2 h-min rounded border border-gray-300" onChange={(e) => setFilename(e.target.value)}/>
+        <ExportCssButton selectors={[{ name: "gradient", value: output }]} filename={filename} />
+      </div>
+      </div>
+
       
       <div className="mt-8 flex flex-col gap-2">
         <h2 className="text-xl font-semibold">Preview</h2>
@@ -51,6 +61,8 @@ export default function Home() {
           </div>
         </div>
       </div>
+
+      <GradientBuilder />
     </main>
   );
 }
