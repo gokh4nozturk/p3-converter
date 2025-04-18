@@ -5,6 +5,7 @@ import ColorPalette from '@/components/ColorPalette';
 import ExportCssButton from '@/components/ExportCssButton';
 import { isValidColor, toDisplayP3, toHex, toHsl, toRgb } from '@/components/utils/colorUtils';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export default function P3ColorConverter() {
   const [input, setInput] = useState('#FF5733');
@@ -49,6 +50,18 @@ export default function P3ColorConverter() {
       setSelectorName(`color-${colorName}`);
     }
   }, [input]);
+
+  const copyToClipboard = (text: string) => {
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        toast.success('Copied to clipboard!');
+      })
+      .catch((err) => {
+        toast.error('Failed to copy to clipboard');
+        console.error('Copy failed: ', err);
+      });
+  };
 
   return (
     <div>
@@ -103,7 +116,16 @@ export default function P3ColorConverter() {
 
           {output && (
             <div className="mt-2 rounded border bg-white p-3 shadow">
-              <p className="font-mono text-sm">{output}</p>
+              <div className="flex items-center justify-between">
+                <p className="font-mono text-sm">{output}</p>
+                <button
+                  type="button"
+                  onClick={() => copyToClipboard(output)}
+                  className="ml-2 rounded bg-gray-200 px-2 py-1 text-xs hover:bg-gray-300"
+                >
+                  Copy
+                </button>
+              </div>
             </div>
           )}
         </div>

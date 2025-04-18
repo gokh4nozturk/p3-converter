@@ -3,6 +3,7 @@
 import ExportCssButton from '@/components/ExportCssButton';
 import { isValidColor, toDisplayP3 } from '@/components/utils/colorUtils';
 import { useEffect, useState } from 'react';
+import { toast } from 'sonner';
 
 export default function GradientBuilder() {
   const [color1, setColor1] = useState('#ff5733');
@@ -32,7 +33,15 @@ export default function GradientBuilder() {
   }, [color1, color2]);
 
   const copyToClipboard = (text: string) => {
-    navigator.clipboard.writeText(text);
+    navigator.clipboard
+      .writeText(text)
+      .then(() => {
+        toast.success('Copied to clipboard!');
+      })
+      .catch((err) => {
+        toast.error('Failed to copy to clipboard');
+        console.error('Copy failed: ', err);
+      });
   };
 
   return (
