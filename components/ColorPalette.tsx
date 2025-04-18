@@ -3,6 +3,7 @@
 import { useState } from 'react';
 
 const DEFAULT_COLORS = [
+  '#FF5733', // Red-Orange
   'red', // Red
   'green', // Green
   'blue', // Blue
