@@ -3,12 +3,12 @@
 import { useState } from 'react';
 
 const DEFAULT_COLORS = [
-  '#FF5733', // Red-Orange
-  '#33FF57', // Green
-  '#3357FF', // Blue
-  '#F3FF33', // Yellow
-  '#FF33F3', // Magenta
-  '#33FFF3', // Cyan
+  'red', // Red
+  'green', // Green
+  'blue', // Blue
+  'yellow', // Yellow
+  'black', // Black
+  'white', // White
 ];
 
 interface ColorPaletteProps {

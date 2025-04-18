@@ -7,6 +7,7 @@ import {
   toHsl,
   toRgb,
 } from '@/components/utils/colorUtils';
+import { cn } from '@/lib/utils';
 import { useEffect, useState } from 'react';
 
 interface ColorComponents {
@@ -98,11 +99,15 @@ export default function ColorInput({ value, onChange }: ColorInputProps) {
             type="text"
             value={colorValue}
             onChange={handleHexChange}
-            className="w-full rounded border border-gray-300 p-2"
+            className={cn('w-full rounded border p-2')}
+            style={{
+              borderColor: isValidColor(colorValue) ? colorValue : undefined,
+              outlineColor: isValidColor(colorValue) ? colorValue : undefined,
+            }}
             placeholder="#RRGGBB"
           />
           <div
-            className="ml-2 h-10 w-10 rounded border"
+            className="ml-2 h-10 w-12 rounded border"
             style={{ backgroundColor: isValidColor(colorValue) ? colorValue : undefined }}
           />
         </div>
