@@ -1,7 +1,7 @@
 'use client';
 
+import GradientBuilder from '@/components/GradientBuilder';
 import P3ColorConverter from '@/components/P3ColorConverter';
-import P3GradientBuilderTab from '@/components/P3GradientBuilderTab';
 import TabLayout from '@/components/TabLayout';
 
 export default function Home() {
@@ -14,7 +14,7 @@ export default function Home() {
     {
       id: 'gradient',
       label: 'P3 Gradient Builder',
-      content: <P3GradientBuilderTab />,
+      content: <GradientBuilder />,
     },
   ];
 
