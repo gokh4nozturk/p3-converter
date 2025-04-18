@@ -67,52 +67,10 @@ export default function P3ColorConverter() {
     <div>
       <h1 className="mb-3 font-bold text-3xl">🎨 P3 Color Converter</h1>
       <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
-        <div className="flex max-w-md flex-col gap-3">
+        <div className="flex w-full max-w-sm flex-col gap-3">
           <ColorInput value={input} onChange={setInput} />
 
           <ColorPalette onColorSelect={setInput} />
-
-          <div className="flex gap-2">
-            <h3 className="font-medium">Output Format:</h3>
-            <div className="flex gap-1">
-              <button
-                type="button"
-                onClick={() => setOutputFormat('p3')}
-                className={`rounded px-3 py-1 ${
-                  outputFormat === 'p3' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
-              >
-                P3
-              </button>
-              <button
-                type="button"
-                onClick={() => setOutputFormat('hex')}
-                className={`rounded px-3 py-1 ${
-                  outputFormat === 'hex' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
-              >
-                HEX
-              </button>
-              <button
-                type="button"
-                onClick={() => setOutputFormat('rgb')}
-                className={`rounded px-3 py-1 ${
-                  outputFormat === 'rgb' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
-              >
-                RGB
-              </button>
-              <button
-                type="button"
-                onClick={() => setOutputFormat('hsl')}
-                className={`rounded px-3 py-1 ${
-                  outputFormat === 'hsl' ? 'bg-blue-600 text-white' : 'bg-gray-200'
-                }`}
-              >
-                HSL
-              </button>
-            </div>
-          </div>
 
           {output && (
             <div className="mt-2 rounded border bg-white p-3 shadow">
@@ -160,7 +118,7 @@ export default function P3ColorConverter() {
           </div>
         </div>
 
-        <div className="flex flex-col gap-3">
+        <div className="flex w-full flex-col gap-3">
           <div className="mt-2 flex flex-col gap-2">
             <h2 className="text-center font-semibold text-xl">Preview</h2>
 

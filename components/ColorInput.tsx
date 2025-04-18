@@ -106,10 +106,6 @@ export default function ColorInput({ value, onChange }: ColorInputProps) {
             }}
             placeholder="#RRGGBB"
           />
-          <div
-            className="ml-2 h-10 w-12 rounded border"
-            style={{ backgroundColor: isValidColor(colorValue) ? colorValue : undefined }}
-          />
         </div>
       )}
 
