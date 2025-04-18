@@ -5,9 +5,38 @@ import { isValidColor, toDisplayP3 } from '@/components/utils/colorUtils';
 import { useEffect, useState } from 'react';
 import { toast } from 'sonner';
 
+// LocalStorage keys
+const STORAGE_KEYS = {
+  input: 'shadcn-converter-input',
+  output: 'shadcn-converter-output',
+};
+
 export default function ShadcnColorConverter() {
   const [input, setInput] = useState('');
   const [output, setOutput] = useState('');
+
+  // Load values from localStorage on component mount
+  useEffect(() => {
+    const savedInput = localStorage.getItem(STORAGE_KEYS.input);
+    const savedOutput = localStorage.getItem(STORAGE_KEYS.output);
+
+    if (savedInput) setInput(savedInput);
+    if (savedOutput) setOutput(savedOutput);
+  }, []);
+
+  // Save input to localStorage when it changes
+  useEffect(() => {
+    if (input) {
+      localStorage.setItem(STORAGE_KEYS.input, input);
+    }
+  }, [input]);
+
+  // Save output to localStorage when it changes
+  useEffect(() => {
+    if (output) {
+      localStorage.setItem(STORAGE_KEYS.output, output);
+    }
+  }, [output]);
 
   // Convert Shadcn UI theme colors to P3 format with fallbacks
   const convertTheme = (themeInput: string) => {
