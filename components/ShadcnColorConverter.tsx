@@ -20,35 +20,50 @@ export default function ShadcnColorConverter() {
       // Process the input line by line
       const lines = themeInput.split('\n');
       const processedLines = lines.map((line) => {
-        // Match CSS variable declarations
-        const varMatch = line.match(/^\s*(--[\w-]+):\s*(.+);?\s*$/);
+        // Match CSS variable declarations with OKLCH format
+        const oklchMatch = line.match(/^\s*(--[\w-]+):\s*oklch\((.+)\);\s*$/);
 
-        if (varMatch) {
-          const [, varName, varValue] = varMatch;
+        if (oklchMatch) {
+          const [, varName, varValue] = oklchMatch;
 
-          // Check if it's a color value (and not radius or other non-color values)
-          if (
-            varName !== '--radius' &&
-            // OKLCH format
-            (varValue.trim().startsWith('oklch(') ||
-              // HSL format (three values with % signs)
-              /^\s*\d+(\.\d+)?\s+\d+(\.\d+)?%\s+\d+(\.\d+)?%\s*$/.test(varValue))
-          ) {
-            // Convert color to P3
-            let color = varValue;
+          // Skip radius
+          if (varName === '--radius') {
+            return line;
+          }
 
-            // Handle HSL format by converting it to a standard CSS color format
-            if (/^\s*\d+(\.\d+)?\s+\d+(\.\d+)?%\s+\d+(\.\d+)?%\s*$/.test(varValue)) {
-              const [h, s, l] = varValue.trim().split(/\s+/);
-              color = `hsl(${h}, ${s}, ${l})`;
+          // Build the OKLCH color string
+          const oklchColor = `oklch(${varValue})`;
+
+          if (isValidColor(oklchColor)) {
+            const p3Color = toDisplayP3(oklchColor);
+            if (p3Color) {
+              // Return the line with P3 color and fallback
+              return `  ${varName}: ${p3Color}, oklch(${varValue});`;
             }
+          }
+        }
 
-            if (isValidColor(color)) {
-              const p3Color = toDisplayP3(color);
-              if (p3Color) {
-                // Return the line with P3 color and fallback
-                return `  ${varName}: ${p3Color}, ${varValue};`;
-              }
+        // Match CSS variable declarations with HSL format (from tailwind format)
+        const hslMatch = line.match(
+          /^\s*(--[\w-]+):\s*(\d+(\.\d+)?)\s+(\d+(\.\d+)?)%\s+(\d+(\.\d+)?)%;\s*$/
+        );
+
+        if (hslMatch) {
+          const [, varName, h, , s, , l] = hslMatch;
+
+          // Skip radius and other non-color values
+          if (varName === '--radius') {
+            return line;
+          }
+
+          // Build the HSL color string
+          const hslColor = `hsl(${h} ${s}% ${l}%)`;
+
+          if (isValidColor(hslColor)) {
+            const p3Color = toDisplayP3(hslColor);
+            if (p3Color) {
+              // Return the line with P3 color and fallback
+              return `  ${varName}: ${p3Color}, ${h} ${s}% ${l}%;`;
             }
           }
         }
