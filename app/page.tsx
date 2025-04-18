@@ -2,6 +2,7 @@
 
 import ExportCssButton from '@/components/ExportCssButton';
 import GradientBuilder from '@/components/GradientBuilder';
+import { FlaskIcon } from '@/components/icons/flask';
 import { toDisplayP3 } from '@/components/utils/colorUtils';
 import { ArrowRight } from 'lucide-react';
 import { useState } from 'react';
@@ -31,11 +32,11 @@ export default function Home() {
               onChange={(e) => setInput(e.target.value)}
             />
             <button
-              className="absolute top-0 right-0 bottom-0 rounded-r px-4 py-2 hover:bg-black hover:text-white"
+              className="absolute top-0 right-0 bottom-0 rounded-r hover:bg-black hover:text-white"
               type="button"
               onClick={handleConvert}
             >
-              <ArrowRight className="h-4 w-4" />
+              <FlaskIcon className="size-full p-2" />
             </button>
           </div>
 
