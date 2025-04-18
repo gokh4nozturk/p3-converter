@@ -4,6 +4,7 @@ import { useState } from "react";
 import { toDisplayP3 } from "@/components/utils/colorUtils";
 import GradientBuilder from "@/components/GradientBuilder";
 import ExportCssButton from "@/components/ExportCssButton";
+import { ArrowRight } from "lucide-react";
 
 export default function Home() {
   const [input, setInput] = useState("#FF5733");
@@ -22,20 +23,21 @@ export default function Home() {
 
       <div className="flex justify-between">
         <div className="flex flex-col gap-4 max-w-md">
-        <input
+        <div className="relative">
+          <input
           value={input}
-          onChange={(e) => setInput(e.target.value)}
-          className="p-2 rounded border border-gray-300"
+          className="p-2 pe-9 rounded border border-gray-300 w-full"
           placeholder="HEX, RGB veya HSL girin"
+          onChange={(e) => setInput(e.target.value)}
         />
-
-        <button
-          onClick={handleConvert}
-          className="bg-black text-white px-4 py-2 rounded hover:bg-gray-800"
-          type="button"
+        <button 
+        className="absolute right-0 top-0 bottom-0 px-4 py-2 rounded hover:bg-black hover:text-white" 
+        type="button"
+        onClick={handleConvert}
         >
-          Convert to display-p3
+          <ArrowRight className="w-4 h-4" />
         </button>
+        </div>
 
         {output && (
           <div className="mt-4 p-4 bg-white border rounded shadow">
