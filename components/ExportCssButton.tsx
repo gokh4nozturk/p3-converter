@@ -13,7 +13,7 @@ export default function ExportCssButton({
 }: ExportCssButtonProps) {
   const [status, setStatus] = useState('');
 
-  const handleExport = ({ selectors, filename = 'styles.css' }: ExportCssButtonProps) => {
+  const handleExport = () => {
     // Generate CSS content with selectors and properties
     const lines = selectors.map(({ name, property = 'color', value }) => {
       // Add a comment with original color/value for reference
@@ -46,7 +46,7 @@ export default function ExportCssButton({
   return (
     <div className="">
       <button
-        onClick={() => handleExport({ selectors, filename })}
+        onClick={handleExport}
         className="rounded bg-green-600 px-4 py-2 text-white hover:bg-green-700"
         type="button"
       >

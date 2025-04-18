@@ -2,7 +2,7 @@
 
 import ExportCssButton from '@/components/ExportCssButton';
 import { isValidColor, toDisplayP3 } from '@/components/utils/colorUtils';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 export default function GradientBuilder() {
   const [color1, setColor1] = useState('#ff5733');
@@ -25,6 +25,12 @@ export default function GradientBuilder() {
     }
   };
 
+  // Update gradient name when colors change
+  // biome-ignore lint/correctness/useExhaustiveDependencies: <explanation>
+  useEffect(() => {
+    updateGradientName();
+  }, [color1, color2]);
+
   return (
     <div className="mt-16 max-w-xl">
       <h2 className="mb-4 font-semibold text-2xl">🧬 P3 Gradient Builder</h2>
@@ -33,20 +39,14 @@ export default function GradientBuilder() {
         <input
           type="text"
           value={color1}
-          onChange={(e) => {
-            setColor1(e.target.value);
-            updateGradientName();
-          }}
+          onChange={(e) => setColor1(e.target.value)}
           className="flex-1 rounded border p-2"
           placeholder="Color 1 (HEX, RGB, HSL)"
         />
         <input
           type="text"
           value={color2}
-          onChange={(e) => {
-            setColor2(e.target.value);
-            updateGradientName();
-          }}
+          onChange={(e) => setColor2(e.target.value)}
           className="flex-1 rounded border p-2"
           placeholder="Color 2 (HEX, RGB, HSL)"
         />
