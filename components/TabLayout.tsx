@@ -28,7 +28,7 @@ export default function TabLayout({ tabs, defaultTab }: TabLayoutProps) {
       const timeout = setTimeout(() => {
         setIsAnimating(false);
         setPrevTab(null);
-      }, 500); // Match this with the animation duration in the CSS
+      }, 650); // Increased duration from 500ms to 650ms
 
       return () => clearTimeout(timeout);
     }
@@ -66,7 +66,7 @@ export default function TabLayout({ tabs, defaultTab }: TabLayoutProps) {
             className="absolute top-0 left-0 w-full"
             style={{
               clipPath: 'inset(0 0 0 0)',
-              animation: 'clipToTop 500ms forwards cubic-bezier(0.77, 0, 0.175, 1)',
+              animation: 'clipToTop 650ms forwards cubic-bezier(0.33, 1, 0.68, 1)',
             }}
           >
             {tabs.find((tab) => tab.id === prevTab)?.content}
@@ -78,7 +78,7 @@ export default function TabLayout({ tabs, defaultTab }: TabLayoutProps) {
           style={{
             clipPath: isAnimating ? 'inset(100% 0 0 0)' : 'inset(0 0 0 0)',
             animation: isAnimating
-              ? 'clipFromBottom 500ms forwards cubic-bezier(0.77, 0, 0.175, 1)'
+              ? 'clipFromBottom 650ms forwards cubic-bezier(0.33, 1, 0.68, 1)'
               : 'none',
           }}
         >
