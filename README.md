@@ -1,4 +1,18 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# P3 Color Converter
+
+A web tool for converting standard sRGB colors to Display P3 format, building P3 gradients, and converting color palettes.
+
+## Why Display P3?
+
+Display P3 color space offers approximately 50% more colors than the traditional sRGB color space, allowing for more vibrant and saturated colors on compatible devices. Modern devices like recent iPhones, iPads, and Macs can display these richer colors, but there aren't many accessible tools for web developers to easily convert their existing colors to P3 format.
+
+## Features
+
+- **P3 Color Converter**: Convert any hex, RGB, or HSL color to Display P3 format
+- **P3 Gradient Builder**: Create beautiful gradients using the wider P3 color gamut
+- **Shadcn Color Converter**: Convert Shadcn UI color palettes to P3 format
+- **Interactive Preview**: Compare sRGB and Display P3 colors side by side
+- **CSS Export**: Easily export your colors as CSS variables
 
 ## Getting Started
 
@@ -16,21 +30,22 @@ bun dev
 
 Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Technologies Used
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+This project is built with:
+
+- [Next.js](https://nextjs.org/) - The React framework
+- [Tailwind CSS](https://tailwindcss.com/) - For styling
+- [Culori](https://culorijs.org/) - Color conversion library
+- [TypeScript](https://www.typescriptlang.org/) - For type safety
 
 ## Learn More
 
-To learn more about Next.js, take a look at the following resources:
+- [P3 Color Space](https://webkit.org/blog/10042/wide-gamut-color-in-css-with-display-p3/) - Apple's WebKit blog on Display P3
+- [CSS Color Module Level 4](https://www.w3.org/TR/css-color-4/) - The CSS specification that includes Display P3
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Deployment
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new) from the creators of Next.js.
 
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Check out the [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.

@@ -44,6 +44,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
+      <meta name="apple-mobile-web-app-title" content="p3 converter" />
       <head>{/* <meta name="google-site-verification" content="YOUR_VERIFICATION_CODE" /> */}</head>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <Toaster position="bottom-right" richColors />
