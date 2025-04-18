@@ -1,11 +1,5 @@
 // components/utils/colorUtils.ts
-import {
-  parse,
-  formatCss,
-  clampRgb,
-  p3,
-  rgb,
-} from "culori";
+import { clampRgb, formatCss, p3, parse, rgb } from 'culori';
 
 export function toDisplayP3(input: string) {
   const parsed = parse(input);
