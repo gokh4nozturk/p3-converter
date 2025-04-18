@@ -142,7 +142,7 @@ export default function ShadcnColorConverter() {
                 </button>
               </div>
               <textarea
-                className="h-[400px] w-full rounded border p-3 font-mono text-sm"
+                className="h-[600px] w-full rounded border p-3 font-mono text-sm"
                 value={input}
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Paste your Shadcn UI theme here (e.g. :root { ... } or @layer base { :root { ... } })"
@@ -161,7 +161,7 @@ export default function ShadcnColorConverter() {
                 </button>
               </div>
               <textarea
-                className="h-[400px] w-full rounded border p-3 font-mono text-sm"
+                className="h-[600px] w-full rounded border p-3 font-mono text-sm"
                 value={output}
                 readOnly
               />
