@@ -52,16 +52,16 @@ export default function P3ColorConverter() {
 
   return (
     <div>
-      <h1 className="mb-6 font-bold text-3xl">🎨 P3 Color Converter</h1>
-      <div className="flex flex-col gap-8 lg:flex-row lg:justify-between">
-        <div className="flex max-w-md flex-col gap-4">
+      <h1 className="mb-3 font-bold text-3xl">🎨 P3 Color Converter</h1>
+      <div className="flex flex-col gap-4 lg:flex-row lg:justify-between">
+        <div className="flex max-w-md flex-col gap-3">
           <ColorInput value={input} onChange={setInput} />
 
           <ColorPalette onColorSelect={setInput} />
 
           <div className="flex gap-2">
             <h3 className="font-medium">Output Format:</h3>
-            <div className="flex gap-2">
+            <div className="flex gap-1">
               <button
                 type="button"
                 onClick={() => setOutputFormat('p3')}
@@ -102,36 +102,38 @@ export default function P3ColorConverter() {
           </div>
 
           {output && (
-            <div className="mt-4 rounded border bg-white p-4 shadow">
+            <div className="mt-2 rounded border bg-white p-3 shadow">
               <p className="font-mono text-sm">{output}</p>
             </div>
           )}
         </div>
 
-        <div className="flex max-w-md flex-col gap-4">
-          <div className="mt-8 flex flex-col gap-2">
+        <div className="flex w-full max-w-md flex-col gap-3">
+          <div className="mt-2 flex flex-col gap-2">
             <h2 className="font-semibold text-xl">Preview</h2>
-            <div className="flex gap-4">
+            <div className="flex gap-2">
               <div
-                className="flex-1 rounded border p-4 text-center"
+                className="flex-1 rounded border py-10 text-center"
                 style={{ backgroundColor: input }}
               >
-                <p className="text-sm">sRGB</p>
+                <p className="font-medium text-sm">sRGB</p>
               </div>
               <div
-                className="flex-1 rounded border p-4 text-center"
+                className="flex-1 rounded border py-10 text-center"
                 style={{
                   backgroundColor: output.includes('color(display-p3') ? output : undefined,
                 }}
               >
-                <p className="text-sm">{outputFormat === 'p3' ? 'display-p3' : outputFormat}</p>
+                <p className="font-medium text-sm">
+                  {outputFormat === 'p3' ? 'display-p3' : outputFormat}
+                </p>
               </div>
             </div>
           </div>
 
-          <div className="mt-4">
-            <h2 className="mb-2 font-semibold text-xl">Export</h2>
-            <div className="mb-2 flex flex-col gap-2">
+          <div className="mt-2">
+            <h2 className="mb-1 font-semibold text-xl">Export</h2>
+            <div className="mb-2 flex flex-col gap-1">
               <label htmlFor="selector-name" className="text-sm">
                 CSS Class Name:
               </label>
