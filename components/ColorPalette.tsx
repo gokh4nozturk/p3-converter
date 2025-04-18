@@ -30,7 +30,7 @@ export default function ColorPalette({
   };
 
   return (
-    <div className="my-4">
+    <div className="mx-1 my-4 max-w-md">
       <h3 className="mb-2 font-medium">Color Palette</h3>
       <div className="flex flex-wrap gap-2">
         {colors.map((color) => (
