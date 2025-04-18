@@ -9,12 +9,6 @@ const DEFAULT_COLORS = [
   '#F3FF33', // Yellow
   '#FF33F3', // Magenta
   '#33FFF3', // Cyan
-  '#FF3333', // Red
-  '#33FF33', // Lime
-  '#3333FF', // Blue
-  '#FFFF33', // Yellow
-  '#FF33FF', // Fuchsia
-  '#33FFFF', // Aqua
 ];
 
 interface ColorPaletteProps {
@@ -26,6 +20,14 @@ export default function ColorPalette({
   onColorSelect,
   colors = DEFAULT_COLORS,
 }: ColorPaletteProps) {
+  const [customColor, setCustomColor] = useState('#000000');
+
+  const handleCustomColorChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const newColor = e.target.value;
+    setCustomColor(newColor);
+    onColorSelect(newColor);
+  };
+
   return (
     <div className="my-4">
       <h3 className="mb-2 font-medium">Color Palette</h3>
@@ -41,6 +43,21 @@ export default function ColorPalette({
             aria-label={`Select color ${color}`}
           />
         ))}
+      </div>
+
+      <div className="mt-4 flex items-center gap-2">
+        <label htmlFor="custom-color" className="text-sm">
+          Custom Color:
+        </label>
+        <input
+          type="color"
+          id="custom-color"
+          value={customColor}
+          onChange={handleCustomColorChange}
+          className="h-8 w-8 cursor-pointer border-0"
+          aria-label="Select custom color"
+        />
+        <span className="text-sm">{customColor}</span>
       </div>
     </div>
   );
